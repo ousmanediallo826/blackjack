@@ -15,6 +15,10 @@ let playerEl = document.getElementById("player-el")
 
 playerEl.textContent = player.name + ": $" + player.chips
 
+
+
+
+
 function getRandomCard() {
     let randomNumber = Math.floor( Math.random()*13 ) + 1
     if (randomNumber > 10) {
@@ -32,7 +36,13 @@ function startGame() {
     let secondCard = getRandomCard()
     cards = [firstCard, secondCard]
     sum = firstCard + secondCard
-    renderGame()
+    if(isBet){
+        renderGame()
+        playerEl.textContent = player.name + ": $" + totalPrice()
+    } else {
+        messageEl.textContent = "Please place your bet before start the game"
+    }
+   
 }
 
 function renderGame() {
@@ -53,6 +63,46 @@ function renderGame() {
     }
     messageEl.textContent = message
 }
+
+const firstBtn = "Bet 20";
+const secondBtn = "Bet 40";
+const thirdBtn = "Bet 80";
+let isBet = false;
+console.log("Is bet" + isBet)
+let firstButton  = document.getElementById("first-bet")
+let secondButton  = document.getElementById("second-bet")
+let thirdButton  = document.getElementById("third-bet")
+let bet = document.getElementById("bet-el")
+firstButton.addEventListener("click", () => betme(firstBtn));
+secondButton.addEventListener("click", () => betme(secondBtn));
+thirdButton.addEventListener("click", () => betme(thirdBtn));
+let currentBet = 0;
+
+
+function updatePlayerEl() {
+    playerEl.textContent = `${player.name}: $${player.chips}`;
+}
+updatePlayerEl();
+
+function betme(value) {
+    currentBet = value;
+    bet.textContent = `Current Bet: ${value}`;
+    isBet = true;
+    console.log(isBet)
+   
+}
+
+function totalPrice() {
+     player.chips -= currentBet;
+     playerEl.textContent = `${player.name}: $${player.chips}`;
+     return player.chips;
+}
+
+
+
+
+
+
 
 
 function newCard() {

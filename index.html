@@ -1,5 +1,6 @@
 <html>
     <head>
+        
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
@@ -10,6 +11,12 @@
         <button onclick="startGame()">START GAME</button>
         <button onclick="newCard()">NEW CARD</button>
         <p id="player-el"></p>
+        <span id="bet-el"></span>
+        <div>
+            <button onclick="betMe()" class="btn" id="first-bet">$20</button>
+            <button onclick="betMe()"class="btn"id="second-bet">$40</button>
+            <button onclick="betMe()"class="btn"id="third-bet" >$80</button>
+        </div>
         <script src="index.js"></script>
     </body>
 </html>
